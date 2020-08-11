@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile as Profile;
+use App\Post as Post;
+use App\Time as Time;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
         //
@@ -25,8 +25,9 @@ class ProfileController extends Controller
      */
     public function create()
     {
+        $times = Time::all();
         $daysOfWeek = config('constants.options.days_of_week');
-        return view('profiles.create', ['daysOfWeek' => $daysOfWeek]);
+        return view('posts.create', ['times' => $times, 'daysOfWeek' => $daysOfWeek]);
     }
 
     /**
@@ -37,22 +38,24 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $profile = new Profile;
+        $post = new Post;
 
-        $profile->child_limit = $request->child_limit;
-        $profile->days_available = json_encode($request->days_available);
-        $profile->times_available = $request->times_available;
+        $post->start_time = $request->start_time;
+        $post->end_time = $request->end_time;
+        $post->day = $request->requested_day;
+//        $post->location = $request->location;
 
-        $profile->save();
+
+        $post->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show(Post $post)
     {
         //
     }
@@ -60,10 +63,10 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
+    public function edit(Post $post)
     {
         //
     }
@@ -72,10 +75,10 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Profile  $profile
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -83,10 +86,10 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Profile $profile)
+    public function destroy(Post $post)
     {
         //
     }

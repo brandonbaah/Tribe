@@ -18,5 +18,6 @@ Route::get('/', function () {
 });
 
 Route::resources([
-    'profiles' => 'ProfileController'
+    'profiles' => 'ProfileController',
+    'posts' => 'PostController'
 ]);
