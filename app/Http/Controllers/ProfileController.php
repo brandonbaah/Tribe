@@ -40,8 +40,12 @@ class ProfileController extends Controller
         $profile = new Profile;
 
         $profile->child_limit = $request->child_limit;
-        $profile->days_available = $request->days_available;
+        $profile->days_available = json_encode($request->days_available);
         $profile->times_available = $request->times_available;
+
+        $profile->save();
+
+
     }
 
     /**
