@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
+use App\Profile as Profile;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -12,6 +12,7 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -24,7 +25,8 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        $daysOfWeek = config('constants.options.days_of_week');
+        return view('profiles.create', ['daysOfWeek' => $daysOfWeek]);
     }
 
     /**
@@ -35,7 +37,11 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $profile = new Profile;
+
+        $profile->child_limit = $request->child_limit;
+        $profile->days_available = $request->days_available;
+        $profile->times_available = $request->times_available;
     }
 
     /**
