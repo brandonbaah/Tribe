@@ -42,8 +42,11 @@ class PostController extends Controller
 
         $post->start_time = $request->start_time;
         $post->end_time = $request->end_time;
-        $post->day = $request->requested_day;
+        $post->date = date('Y-m-d H:i:s',strtotime($request->requested_day));
 //        $post->location = $request->location;
+
+//        $time = strtotime('10/16/2003');
+        // Going to need to implement actual date time structure
 
 
         $post->save();
