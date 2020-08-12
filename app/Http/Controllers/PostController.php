@@ -27,8 +27,10 @@ class PostController extends Controller
     {
         $times = Time::all();
         $daysOfWeek = config('constants.options.days_of_week');
-        return view('posts.create', ['times' => $times, 'daysOfWeek' => $daysOfWeek]);
+        $inHome = [1,2];
+        return view('posts.create', ['times' => $times, 'daysOfWeek' => $daysOfWeek, 'inHome' => $inHome]);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -43,11 +45,9 @@ class PostController extends Controller
         $post->start_time = $request->start_time;
         $post->end_time = $request->end_time;
         $post->date = date('Y-m-d H:i:s',strtotime($request->requested_day));
-//        $post->location = $request->location;
+        $post->in_home = $request->in_home;
 
-//        $time = strtotime('10/16/2003');
         // Going to need to implement actual date time structure
-
 
         $post->save();
     }

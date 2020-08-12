@@ -15,11 +15,11 @@
 </head>
 <body>
 <div align="center">
-    <h1>Create a New Profile</h1>
+    <h1>Create a New Posts</h1>
 </div>
 <form action="/posts" method="POST">
     @csrf
-    <label for="days">Choose your available days:</label>
+    <label for="requested_day">Choose your available days:</label>
 
     <p>Date: <input type="text" name="requested_day" id="datepicker"></p>
 
@@ -33,6 +33,12 @@
         @foreach($times as $timeSlot)
             <option value="{{ $timeSlot->actual_time }}">{{ $timeSlot->actual_time }}</option>
         @endforeach
+    </select>
+
+    <label for="in_home">Choose Location</label>
+    <select name="in_home" id="">
+        <option value="{{ $inHome[0] }}">My Home</option>
+        <option value="{{ $inHome[1] }}">Sitter's Home</option>
     </select>
     <input type="submit">
 </form>
