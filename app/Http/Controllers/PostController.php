@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post as Post;
 use App\Time as Time;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -15,7 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        dd('Post');
+        $allPost = new Post;
+        dd($allPost->getPosts());
+
     }
 
     /**
