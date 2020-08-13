@@ -17,7 +17,7 @@
 <div align="center">
     <h1>Edit Your Post</h1>
 </div>
-<form action="/posts/{{}}" method="PATCH">
+<form action="/posts/{{$post->id}}" method="PATCH">
     @csrf
     <label for="requested_day">Choose your available days:</label>
 
@@ -41,6 +41,12 @@
         <option value="{{ $inHome[1] }}">Sitter's Home</option>
     </select>
     <input type="submit">
+</form>
+
+<form action="/posts/{{ $post->id}}" method="POST">
+    @csrf
+    @method('DELETE')
+    <input type="submit" value="Delete">
 </form>
 
 </body>

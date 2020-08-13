@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        dd('Post');
     }
 
     /**
@@ -73,9 +73,17 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        dd($post);
+        $times = Time::all();
+        $daysOfWeek = config('constants.options.days_of_week');
+        $inHome = config('constants.options.in_home');
 
-        return view('posts.edit', [ 'post' => $post ]);
+        return view('posts.edit', [
+            'post' => $post,
+            'times' => $times,
+            'daysOfWeek' => $daysOfWeek,
+            'inHome' => $inHome
+            ]
+        );
     }
 
     /**
@@ -87,7 +95,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        dd($post);
+        $post->start_time = $request->start_time;
+        $post->end_time = $request->end_time;
+        $post->date = date('Y-m-d H:i:s',strtotime($request->requested_day));
+        $post->in_home = $request->in_home;
+
+        $post->save();
     }
 
     /**
@@ -98,6 +111,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+
+        $post->delete();
+
+        redirect('/posts');
     }
 }
