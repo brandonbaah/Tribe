@@ -16,8 +16,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $allPost = new Post;
-        dd($allPost->getPosts());
+        $allPosts = new Post;
+        $allPosts = $allPosts->getPosts();
+
+        return view('posts.index', ['allPosts' => $allPosts]);
 
     }
 
@@ -31,6 +33,7 @@ class PostController extends Controller
         $times = Time::all();
         $daysOfWeek = config('constants.options.days_of_week');
         $inHome = [1,2];
+
         return view('posts.create', ['times' => $times, 'daysOfWeek' => $daysOfWeek, 'inHome' => $inHome]);
     }
 
@@ -49,8 +52,6 @@ class PostController extends Controller
         $post->end_time = $request->end_time;
         $post->date = date('Y-m-d H:i:s',strtotime($request->requested_day));
         $post->in_home = $request->in_home;
-
-        // Going to need to implement actual date time structure
 
         $post->save();
     }

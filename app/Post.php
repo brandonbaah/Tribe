@@ -13,14 +13,17 @@ class Post extends Model
 
     public function getPosts()
     {
-        return DB::table('posts')->select(
-            'id',
-            'start_time',
-            'end_time',
-            'in_home',
-            'date',
-            'notes',
-            'created_at'
-        )->get();
+        return DB::table('posts')
+            ->select(
+                'id',
+                'start_time',
+                'end_time',
+                'in_home',
+                'date',
+                'notes',
+                'created_at'
+            )->where(
+              'deleted_at', null
+            )->get();
     }
 }
