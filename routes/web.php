@@ -21,3 +21,7 @@ Route::resources([
     'profiles' => 'ProfileController',
     'posts' => 'PostController'
 ]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
