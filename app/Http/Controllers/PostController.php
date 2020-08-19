@@ -18,6 +18,7 @@ class PostController extends Controller
     {
         $allPosts = new Post;
         $allPosts = $allPosts->getPosts();
+        // dd($allPosts);
 
         return view('posts.index', ['allPosts' => $allPosts]);
 
