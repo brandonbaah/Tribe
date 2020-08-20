@@ -10,7 +10,7 @@
                    @csrf
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                         <input type="hidden" name="post_id" value="{{ $post->post_id }}">
-                        <input type="submit" value="Going" >
+                        <input type="submit" value="{{ $post->attending_event }}" >
                    </form>
                </div>
             <!-- </a> -->
