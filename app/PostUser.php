@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostUser extends Model
 {
-    use SoftDeletes;
     protected $guarded = [];
+    protected $table = 'post_user';
 }

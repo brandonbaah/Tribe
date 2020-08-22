@@ -16,12 +16,9 @@ class ManagePostUser extends Controller
      */
     public function __invoke(Request $request)
     {
-        // dd($request->all());
-        $PostUserRecord = PostUser::withTrashed()
-                            ->where('post_id', $request->post_id)
+        $PostUserRecord = PostUser::where('post_id', $request->post_id)
                             ->where('user_id', $request->user_id)
                             ->get();
-        // dd($PostUserRecord);
         if(count($PostUserRecord) == 0)
         {
             $newPostUserRecord = new PostUser;
@@ -29,14 +26,9 @@ class ManagePostUser extends Controller
             $newPostUserRecord->post_id = $request->post_id;
             $newPostUserRecord->save();
         } else {
-
-            if($PostUserRecord[0]->trashed())
-            {
-               $PostUserRecord[0]->restore(); 
-            } else {
-                $PostUserRecord[0]->delete();
-            }
-            
+            $PostUserRecord[0]->delete();
         }
+
+        return redirect()->action('PostController@index');
     }
 }

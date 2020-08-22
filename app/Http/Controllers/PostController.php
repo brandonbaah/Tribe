@@ -6,6 +6,7 @@ use App\Post as Post;
 use App\Time as Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class PostController extends Controller
 {
@@ -16,12 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $allPosts = new Post;
-        $allPosts = $allPosts->getPosts();
-        // dd($allPosts);
+        $posts = Post::withCount('users')->get();
 
-        return view('posts.index', ['allPosts' => $allPosts]);
-
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -52,9 +50,12 @@ class PostController extends Controller
         $post->start_time = $request->start_time;
         $post->end_time = $request->end_time;
         $post->date = date('Y-m-d H:i:s',strtotime($request->requested_day));
-        $post->in_home = $request->in_home;
+        $post->name = $request->event_name;
+        $post->user_id = Auth::user()->id;
 
         $post->save();
+
+        return redirect()->action('PostController@index');
     }
 
     /**
