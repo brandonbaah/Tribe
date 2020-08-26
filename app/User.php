@@ -19,6 +19,12 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Post');
     }
 
+    public function tribes()
+    {
+        return $this->belongsToMany('App\Tribe');
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *

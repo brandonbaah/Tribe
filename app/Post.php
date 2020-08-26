@@ -30,8 +30,6 @@ class Post extends Model
             'users.name'
         )->distinct()->get();
 
-        // dd($user);
-
         return $user[0]->name;
     }
     

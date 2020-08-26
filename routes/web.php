@@ -18,8 +18,8 @@ Route::get('/', function () {
 });
 
 Route::resources([
-    'profiles' => 'ProfileController',
-    'posts' => 'PostController'
+    'posts' => 'PostController',
+    'tribes' => 'TribeController'
 ]);
 
 Auth::routes();

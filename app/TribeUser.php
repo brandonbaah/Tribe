@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class TribeUser extends Model
 {
-
+    protected $table = 'tribe_user';
 }
