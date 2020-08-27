@@ -104,7 +104,6 @@ class PostController extends Controller
         $post->start_time = $request->start_time;
         $post->end_time = $request->end_time;
         $post->date = date('Y-m-d H:i:s',strtotime($request->requested_day));
-        $post->in_home = $request->in_home;
 
         $post->save();
     }
