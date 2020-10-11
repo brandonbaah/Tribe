@@ -84,7 +84,7 @@ class TribeController extends Controller
      */
     public function show(Tribe $tribe)
     {
-        //
+        return view('tribes.show', ['tribe' => $tribe]);
     }
 
     /**
@@ -107,7 +107,17 @@ class TribeController extends Controller
      */
     public function update(Request $request, Tribe $tribe)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:255'],
+            'description' => ['required', 'max:255']
+        ]);
+
+        $tribe->name = $request->name;
+        $tribe->description = $request->description;
+
+        $tribe->save();
+
+
     }
 
     /**
@@ -118,6 +128,8 @@ class TribeController extends Controller
      */
     public function destroy(Tribe $tribe)
     {
-        //
+        $tribe->delete();
+
+        redirect('/tribes');
     }
 }

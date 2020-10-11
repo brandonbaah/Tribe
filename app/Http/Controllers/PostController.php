@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post as Post;
+use App\PostUser as PostUser;
 use App\Time as Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +56,12 @@ class PostController extends Controller
 
         $post->save();
 
+        $newPostUserRecord = new PostUser;
+        $newPostUserRecord->user_id = Auth::user()->id;
+        $newPostUserRecord->post_id = $post->id;
+
+        $newPostUserRecord->save();
+
         return redirect()->action('PostController@index');
     }
 
@@ -104,7 +111,6 @@ class PostController extends Controller
         $post->start_time = $request->start_time;
         $post->end_time = $request->end_time;
         $post->date = date('Y-m-d H:i:s',strtotime($request->requested_day));
-        $post->in_home = $request->in_home;
 
         $post->save();
     }

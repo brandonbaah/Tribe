@@ -21,6 +21,11 @@ class Post extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function tribe()
+    {
+        return $this->belongsTo('App\Tribe');
+    }
+
     public function getUser($id)
     {
         $user = DB::table('posts')
