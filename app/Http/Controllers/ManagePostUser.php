@@ -24,7 +24,7 @@ class ManagePostUser extends Controller
             $newPostUserRecord = new PostUser;
             $newPostUserRecord->user_id = $request->user_id;
             $newPostUserRecord->post_id = $request->post_id;
-            $newPostUserRecord->save();
+            $newPostUserRecord->save(); 
         } else {
             $PostUserRecord[0]->delete();
         }

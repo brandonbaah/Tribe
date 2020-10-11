@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 Route::resources([
     'posts' => 'PostController',
-    'tribes' => 'TribeController'
+    'tribes' => 'TribeController',
+    'invitations' => 'InvitationController'
 ]);
 
 Auth::routes();

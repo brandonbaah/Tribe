@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post as Post;
+use App\PostUser as PostUser;
 use App\Time as Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -54,6 +55,12 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
 
         $post->save();
+
+        $newPostUserRecord = new PostUser;
+        $newPostUserRecord->user_id = Auth::user()->id;
+        $newPostUserRecord->post_id = $post->id;
+
+        $newPostUserRecord->save();
 
         return redirect()->action('PostController@index');
     }
